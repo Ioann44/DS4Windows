@@ -42,14 +42,98 @@ namespace DS4WinWPF.DS4Control.DTOXml
             get; set;
         }
 
+        [XmlElement("ForceGyroAxisFixup")]
+        public string ForceGyroAxisFixupString
+        {
+            get => ForceGyroAxisFixup.ToString();
+            set => ForceGyroAxisFixup = XmlDataUtilities.StrToBool(value);
+        }
+
+        [XmlIgnore]
+        public bool ForceGyroAxisFixup
+        {
+            get; set;
+        } = true;
+
+        [XmlElement("EnableGyroYawOffset")]
+        public string EnableGyroYawOffsetString
+        {
+            get => EnableGyroYawOffset.ToString();
+            set => EnableGyroYawOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        [XmlIgnore]
+        public bool EnableGyroYawOffset
+        {
+            get; set;
+        }
+
+        [XmlElement("GyroYawOffset")]
+        public int GyroYawOffset
+        {
+            get; set;
+        }
+
+        [XmlElement("EnableGyroPitchOffset")]
+        public string EnableGyroPitchOffsetString
+        {
+            get => EnableGyroPitchOffset.ToString();
+            set => EnableGyroPitchOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        [XmlIgnore]
+        public bool EnableGyroPitchOffset
+        {
+            get; set;
+        }
+
+        [XmlElement("GyroPitchOffset")]
+        public int GyroPitchOffset
+        {
+            get; set;
+        }
+
+        [XmlElement("EnableGyroRollOffset")]
+        public string EnableGyroRollOffsetString
+        {
+            get => EnableGyroRollOffset.ToString();
+            set => EnableGyroRollOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        [XmlIgnore]
+        public bool EnableGyroRollOffset
+        {
+            get; set;
+        }
+
+        [XmlElement("GyroRollOffset")]
+        public int GyroRollOffset
+        {
+            get; set;
+        }
+
         public void MapFrom(DS4ControllerOptions source)
         {
             IsCopyCat = source.IsCopyCat;
+            ForceGyroAxisFixup = source.ForceGyroAxisFixup;
+            EnableGyroYawOffset = source.EnableGyroYawOffset;
+            GyroYawOffset = source.GyroYawOffset;
+            EnableGyroPitchOffset = source.EnableGyroPitchOffset;
+            GyroPitchOffset = source.GyroPitchOffset;
+            EnableGyroRollOffset = source.EnableGyroRollOffset;
+            GyroRollOffset = source.GyroRollOffset;
         }
 
         public void MapTo(DS4ControllerOptions destination)
         {
             destination.IsCopyCat = IsCopyCat;
+            destination.ForceGyroAxisFixup = ForceGyroAxisFixup;
+            destination.EnableGyroYawOffset = EnableGyroYawOffset;
+            destination.GyroYawOffset = GyroYawOffset;
+            destination.EnableGyroPitchOffset = EnableGyroPitchOffset;
+            destination.GyroPitchOffset = GyroPitchOffset;
+            destination.EnableGyroRollOffset = EnableGyroRollOffset;
+            destination.GyroRollOffset = GyroRollOffset;
         }
     }
 }

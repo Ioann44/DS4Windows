@@ -584,6 +584,7 @@ namespace DS4Windows
             {
                 if (deviceSlotNumber == value) return;
                 deviceSlotNumber = value;
+                sixAxis.DeviceIdx = value;
                 DeviceSlotNumberChanged?.Invoke(this, EventArgs.Empty);
             }
         }

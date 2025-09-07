@@ -1557,6 +1557,12 @@ namespace DS4Windows
             }
         }
 
+        public void TryForceGyroYawFixup(in DS4Device device) {
+            int index = device.DeviceSlotNumber;
+            if (DS4ControllerOpts[index].ForceGyroAxisFixup && device.SixAxis.fixupInvertedGyroAxis())
+                AppLogger.LogToGui($"Forcely fixed inverted YAW gyro axis in DS4 v.1 BT gamepad ({device.MacAddress})", false);
+        }
+
         public bool Start(bool showlog = true)
         {
             inServiceTask = true;
@@ -1669,6 +1675,7 @@ namespace DS4Windows
                         DS4Controllers[i] = device;
                         device.DeviceSlotNumber = i;
                         PrepareConnectedInputControllerSettingEvents(numControllers, device, index: i);
+                        TryForceGyroYawFixup(device);
 
                         if (i >= CURRENT_DS4_CONTROLLER_LIMIT) // out of Xinput devices!
                             break;
@@ -2027,6 +2034,7 @@ namespace DS4Windows
                             DS4Controllers[Index] = device;
                             device.DeviceSlotNumber = Index;
                             PrepareConnectedInputControllerSettingEvents(numControllers, device, Index);
+                            TryForceGyroYawFixup(device);
 
                             HotplugController?.Invoke(this, device, Index);
                             break;

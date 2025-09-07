@@ -127,6 +127,97 @@ namespace DS4Windows
         }
         public event EventHandler IsCopyCatChanged;
 
+        private bool forceGyroAxisFixup = false;
+        public bool ForceGyroAxisFixup
+        {
+            get => forceGyroAxisFixup;
+            set
+            {
+                if (forceGyroAxisFixup == value) return;
+                forceGyroAxisFixup = value;
+                ForceGyroAxisFixupChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler ForceGyroAxisFixupChanged;
+
+        private bool enableGyroYawOffset = false;
+        public bool EnableGyroYawOffset
+        {
+            get => enableGyroYawOffset;
+            set
+            {
+                if (enableGyroYawOffset == value) return;
+                enableGyroYawOffset = value;
+                EnableGyroYawOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler EnableGyroYawOffsetChanged;
+
+        private int gyroYawOffset = 0;
+        public int GyroYawOffset
+        {
+            get => gyroYawOffset;
+            set
+            {
+                if (gyroYawOffset == value) return;
+                gyroYawOffset = value;
+                GyroYawOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler GyroYawOffsetChanged;
+
+        private bool enableGyroPitchOffset = false;
+        public bool EnableGyroPitchOffset
+        {
+            get => enableGyroPitchOffset;
+            set
+            {
+                if (enableGyroPitchOffset == value) return;
+                enableGyroPitchOffset = value;
+                EnableGyroPitchOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler EnableGyroPitchOffsetChanged;
+
+        private int gyroPitchOffset = 0;
+        public int GyroPitchOffset
+        {
+            get => gyroPitchOffset;
+            set
+            {
+                if (gyroPitchOffset == value) return;
+                gyroPitchOffset = value;
+                GyroPitchOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler GyroPitchOffsetChanged;
+
+        private bool enableGyroRollOffset = false;
+        public bool EnableGyroRollOffset
+        {
+            get => enableGyroRollOffset;
+            set
+            {
+                if (enableGyroRollOffset == value) return;
+                enableGyroRollOffset = value;
+                EnableGyroRollOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler EnableGyroRollOffsetChanged;
+
+        private int gyroRollOffset = 0;
+        public int GyroRollOffset
+        {
+            get => gyroRollOffset;
+            set
+            {
+                if (gyroRollOffset == value) return;
+                gyroRollOffset = value;
+                GyroRollOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler GyroRollOffsetChanged;
+
         public DS4ControllerOptions(InputDeviceType deviceType) : base(deviceType)
         {
         }

@@ -855,6 +855,90 @@ namespace DS4WinWPF.DS4Control.DTOXml
             get; set;
         }
 
+        private bool _forceGyroAxisFixup = BackingStore.DEFAULT_FORCE_GYRO_AXIS_FIXUP;
+        [XmlIgnore]
+        public bool ForceGyroAxisFixup
+        {
+            get => _forceGyroAxisFixup;
+            set => _forceGyroAxisFixup = value;
+        }
+
+        [XmlElement("ForceGyroAxisFixup")]
+        public string ForceGyroAxisFixupString
+        {
+            get => _forceGyroAxisFixup.ToString();
+            set => _forceGyroAxisFixup = XmlDataUtilities.StrToBool(value);
+        }
+
+        private bool _enableGyroYawOffset;
+        [XmlIgnore]
+        public bool EnableGyroYawOffset
+        {
+            get => _enableGyroYawOffset;
+            set => _enableGyroYawOffset = value;
+        }
+
+        [XmlElement("EnableGyroYawOffset")]
+        public string EnableGyroYawOffsetString
+        {
+            get => _enableGyroYawOffset.ToString();
+            set => _enableGyroYawOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        private int _gyroYawOffset;
+        [XmlElement("GyroYawOffset")]
+        public int GyroYawOffset
+        {
+            get => _gyroYawOffset;
+            set => _gyroYawOffset = value;
+        }
+
+        private bool _enableGyroPitchOffset;
+        [XmlIgnore]
+        public bool EnableGyroPitchOffset
+        {
+            get => _enableGyroPitchOffset;
+            set => _enableGyroPitchOffset = value;
+        }
+
+        [XmlElement("EnableGyroPitchOffset")]
+        public string EnableGyroPitchOffsetString
+        {
+            get => _enableGyroPitchOffset.ToString();
+            set => _enableGyroPitchOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        private int _gyroPitchOffset;
+        [XmlElement("GyroPitchOffset")]
+        public int GyroPitchOffset
+        {
+            get => _gyroPitchOffset;
+            set => _gyroPitchOffset = value;
+        }
+
+        private bool _enableGyroRollOffset;
+        [XmlIgnore]
+        public bool EnableGyroRollOffset
+        {
+            get => _enableGyroRollOffset;
+            set => _enableGyroRollOffset = value;
+        }
+
+        [XmlElement("EnableGyroRollOffset")]
+        public string EnableGyroRollOffsetString
+        {
+            get => _enableGyroRollOffset.ToString();
+            set => _enableGyroRollOffset = XmlDataUtilities.StrToBool(value);
+        }
+
+        private int _gyroRollOffset;
+        [XmlElement("GyroRollOffset")]
+        public int GyroRollOffset
+        {
+            get => _gyroRollOffset;
+            set => _gyroRollOffset = value;
+        }
+
         private bool _gyroTriggerTurns = BackingStore.DEFAULT_GYRO_TRIGGER_TURNS;
         [XmlElement("GyroTriggerTurns")]
         public string GyroTriggerTurnsString
@@ -862,6 +946,7 @@ namespace DS4WinWPF.DS4Control.DTOXml
             get => _gyroTriggerTurns.ToString();
             set => _gyroTriggerTurns = XmlDataUtilities.StrToBool(value);
         }
+
 
         [XmlElement("GyroControlsSettings")]
         public GyroControlsSettings GyroControlsSettings
@@ -1614,6 +1699,13 @@ namespace DS4WinWPF.DS4Control.DTOXml
             GyroSensitivity = source.gyroSensitivity[deviceIndex];
             GyroSensVerticalScale = source.gyroSensVerticalScale[deviceIndex];
             GyroInvert = source.gyroInvert[deviceIndex];
+            ForceGyroAxisFixup = source.ds4ControllerOpts[deviceIndex].ForceGyroAxisFixup;
+            EnableGyroYawOffset = source.ds4ControllerOpts[deviceIndex].EnableGyroYawOffset;
+            GyroYawOffset = source.ds4ControllerOpts[deviceIndex].GyroYawOffset;
+            EnableGyroPitchOffset = source.ds4ControllerOpts[deviceIndex].EnableGyroPitchOffset;
+            GyroPitchOffset = source.ds4ControllerOpts[deviceIndex].GyroPitchOffset;
+            EnableGyroRollOffset = source.ds4ControllerOpts[deviceIndex].EnableGyroRollOffset;
+            GyroRollOffset = source.ds4ControllerOpts[deviceIndex].GyroRollOffset;
             _gyroTriggerTurns = source.gyroTriggerTurns[deviceIndex];
             GyroMouseSmoothingSettings = new GyroMouseSmoothingSettings()
             {
@@ -2201,6 +2293,13 @@ namespace DS4WinWPF.DS4Control.DTOXml
             destination.gyroSensitivity[deviceIndex] = GyroSensitivity;
             destination.gyroSensVerticalScale[deviceIndex] = GyroSensVerticalScale;
             destination.gyroInvert[deviceIndex] = GyroInvert;
+            destination.forceGyroAxisFixup[deviceIndex] = ForceGyroAxisFixup;
+            destination.enableGyroYawOffset[deviceIndex] = EnableGyroYawOffset;
+            destination.gyroYawOffset[deviceIndex] = GyroYawOffset;
+            destination.enableGyroPitchOffset[deviceIndex] = EnableGyroPitchOffset;
+            destination.gyroPitchOffset[deviceIndex] = GyroPitchOffset;
+            destination.enableGyroRollOffset[deviceIndex] = EnableGyroRollOffset;
+            destination.gyroRollOffset[deviceIndex] = GyroRollOffset;
             destination.gyroTriggerTurns[deviceIndex] = _gyroTriggerTurns;
 
             if (GyroMouseSmoothingSettings != null)

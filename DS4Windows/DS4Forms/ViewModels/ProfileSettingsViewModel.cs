@@ -2889,6 +2889,102 @@ namespace DS4WinWPF.DS4Forms.ViewModels
             set => Global.UseGenericRumbleStrRescaleForDualSenses[device] = value;
         }
 
+        public bool ForceGyroAxisFixup
+        {
+            get => Global.DS4ControllerOpts[device].ForceGyroAxisFixup;
+            set
+            {
+                bool temp = Global.DS4ControllerOpts[device].ForceGyroAxisFixup;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].ForceGyroAxisFixup = value;
+                ForceGyroAxisFixupChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler ForceGyroAxisFixupChanged;
+
+        public bool EnableGyroYawOffset
+        {
+            get => Global.DS4ControllerOpts[device].EnableGyroYawOffset;
+            set
+            {
+                bool temp = Global.DS4ControllerOpts[device].EnableGyroYawOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].EnableGyroYawOffset = value;
+                EnableGyroYawOffsetChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        public event EventHandler EnableGyroYawOffsetChanged;
+
+        public int GyroYawOffset
+        {
+            get => Global.DS4ControllerOpts[device].GyroYawOffset;
+            set
+            {
+                int temp = Global.DS4ControllerOpts[device].GyroYawOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].GyroYawOffset = value;
+                GyroYawOffsetChanged?.Invoke(this, EventArgs.Empty);
+                Global.CacheProfileCustomsFlags(device);
+            }
+        }
+        public event EventHandler GyroYawOffsetChanged;
+
+        public bool EnableGyroPitchOffset
+        {
+            get => Global.DS4ControllerOpts[device].EnableGyroPitchOffset;
+            set
+            {
+                bool temp = Global.DS4ControllerOpts[device].EnableGyroPitchOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].EnableGyroPitchOffset = value;
+                EnableGyroPitchOffsetChanged?.Invoke(this, EventArgs.Empty);
+                Global.CacheProfileCustomsFlags(device);
+            }
+        }
+        public event EventHandler EnableGyroPitchOffsetChanged;
+
+        public int GyroPitchOffset
+        {
+            get => Global.DS4ControllerOpts[device].GyroPitchOffset;
+            set
+            {
+                int temp = Global.DS4ControllerOpts[device].GyroPitchOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].GyroPitchOffset = value;
+                GyroPitchOffsetChanged?.Invoke(this, EventArgs.Empty);
+                Global.CacheProfileCustomsFlags(device);
+            }
+        }
+        public event EventHandler GyroPitchOffsetChanged;
+
+        public bool EnableGyroRollOffset
+        {
+            get => Global.DS4ControllerOpts[device].EnableGyroRollOffset;
+            set
+            {
+                bool temp = Global.DS4ControllerOpts[device].EnableGyroRollOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].EnableGyroRollOffset = value;
+                EnableGyroRollOffsetChanged?.Invoke(this, EventArgs.Empty);
+                Global.CacheProfileCustomsFlags(device);
+            }
+        }
+        public event EventHandler EnableGyroRollOffsetChanged;
+
+        public int GyroRollOffset
+        {
+            get => Global.DS4ControllerOpts[device].GyroRollOffset;
+            set
+            {
+                int temp = Global.DS4ControllerOpts[device].GyroRollOffset;
+                if (temp == value) return;
+                Global.DS4ControllerOpts[device].GyroRollOffset = value;
+                GyroRollOffsetChanged?.Invoke(this, EventArgs.Empty);
+                Global.CacheProfileCustomsFlags(device);
+            }
+        }
+        public event EventHandler GyroRollOffsetChanged;
+
         public bool UsingMinViGEm173333
         {
             get => Global.IsUsingMinViGEm117333();
@@ -3030,6 +3126,13 @@ namespace DS4WinWPF.DS4Forms.ViewModels
             TouchpadOutputIndexChanging += ProfileSettingsViewModel_TouchpadOutputIndexChanging;
             TouchpadOutputIndexChanged += ProfileSettingsViewModel_TouchpadOutputIndexChanged;
             TouchMouseStickTrackballFrictionChanged += ProfileSettingsViewModel_TouchMouseStickTrackballFrictionChanged;
+            ForceGyroAxisFixupChanged += CalcProfileFlags;
+            EnableGyroYawOffsetChanged += CalcProfileFlags;
+            GyroYawOffsetChanged += CalcProfileFlags;
+            EnableGyroPitchOffsetChanged += CalcProfileFlags;
+            GyroPitchOffsetChanged += CalcProfileFlags;
+            EnableGyroRollOffsetChanged += CalcProfileFlags;
+            GyroRollOffsetChanged += CalcProfileFlags;
         }
 
         private void ProfileSettingsViewModel_TouchMouseStickTrackballFrictionChanged(object sender, EventArgs e)

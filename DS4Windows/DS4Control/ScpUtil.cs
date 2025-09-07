@@ -2542,6 +2542,8 @@ namespace DS4Windows
 
         public static ControlServiceDeviceOptions DeviceOptions => m_Config.deviceOptions;
 
+        public static DS4ControllerOptions[] DS4ControllerOpts => m_Config.ds4ControllerOpts;
+
         public static OutContType[] OutContType => m_Config.outputDevType;
         public static bool[] OutputVirtualTriggerButton => m_Config.outputVirtualTriggerButtons;
         public static DS4TriggerOutputMode[] OutputDS4TriggerMode => m_Config.outputDS4TriggerMode;
@@ -3692,6 +3694,23 @@ namespace DS4Windows
         // Cache whether profile has custom extras
         public bool[] containsCustomExtras = new bool[Global.TEST_PROFILE_ITEM_COUNT] { false, false, false, false, false, false, false, false, false };
 
+        public const bool DEFAULT_FORCE_GYRO_AXIS_FIXUP = false;
+        public bool[] forceGyroAxisFixup = new bool[Global.TEST_PROFILE_ITEM_COUNT];
+
+        public const bool DEFAULT_ENABLE_GYRO_YAW_OFFSET = false;
+        public bool[] enableGyroYawOffset = new bool[Global.TEST_PROFILE_ITEM_COUNT];
+        public int[] gyroYawOffset = new int[Global.TEST_PROFILE_ITEM_COUNT];
+
+        public const bool DEFAULT_ENABLE_GYRO_PITCH_OFFSET = false;
+        public bool[] enableGyroPitchOffset = new bool[Global.TEST_PROFILE_ITEM_COUNT];
+        public int[] gyroPitchOffset = new int[Global.TEST_PROFILE_ITEM_COUNT];
+
+        public const bool DEFAULT_ENABLE_GYRO_ROLL_OFFSET = false;
+        public bool[] enableGyroRollOffset = new bool[Global.TEST_PROFILE_ITEM_COUNT];
+        public int[] gyroRollOffset = new int[Global.TEST_PROFILE_ITEM_COUNT];
+
+        public DS4ControllerOptions[] ds4ControllerOpts = new DS4ControllerOptions[Global.TEST_PROFILE_ITEM_COUNT];
+
         public int[] gyroSensitivity = new int[Global.TEST_PROFILE_ITEM_COUNT]
         { DEFAULT_GYRO_SENS, DEFAULT_GYRO_SENS, DEFAULT_GYRO_SENS,
           DEFAULT_GYRO_SENS, DEFAULT_GYRO_SENS, DEFAULT_GYRO_SENS,
@@ -3795,6 +3814,7 @@ namespace DS4Windows
                 }
 
                 ds4controlSettings[i] = new ControlSettingsGroup(ds4settings[i]);
+                ds4ControllerOpts[i] = new DS4ControllerOptions(DS4Windows.InputDevices.InputDeviceType.DS4);
 
                 EstablishDefaultSpecialActions(i);
                 CacheExtraProfileInfo(i);
@@ -5174,6 +5194,15 @@ namespace DS4Windows
                     int tempDZ = gyroMouseDZ[device];
                     SetGyroMouseDZ(device, tempDZ, control);
                 }
+
+                // Transfer gyro offset values from individual arrays to DS4ControllerOptions
+                ds4ControllerOpts[device].ForceGyroAxisFixup = forceGyroAxisFixup[device];
+                ds4ControllerOpts[device].EnableGyroYawOffset = enableGyroYawOffset[device];
+                ds4ControllerOpts[device].GyroYawOffset = gyroYawOffset[device];
+                ds4ControllerOpts[device].EnableGyroPitchOffset = enableGyroPitchOffset[device];
+                ds4ControllerOpts[device].GyroPitchOffset = gyroPitchOffset[device];
+                ds4ControllerOpts[device].EnableGyroRollOffset = enableGyroRollOffset[device];
+                ds4ControllerOpts[device].GyroRollOffset = gyroRollOffset[device];
 
                 // If a device exists, make sure to transfer relevant profile device
                 // options to device instance
@@ -9395,6 +9424,30 @@ namespace DS4Windows
             touchpadButtonMode[device] = TouchButtonActivationMode.Click;
             outputDevType[device] = DEFAULT_OUT_CONT_TYPE;
             ds4Mapping = false;
+
+            ds4ControllerOpts[device].ForceGyroAxisFixup = DEFAULT_FORCE_GYRO_AXIS_FIXUP;
+            ds4ControllerOpts[device].EnableGyroYawOffset = DEFAULT_ENABLE_GYRO_YAW_OFFSET;
+            ds4ControllerOpts[device].GyroYawOffset = 0;
+            ds4ControllerOpts[device].EnableGyroPitchOffset = DEFAULT_ENABLE_GYRO_PITCH_OFFSET;
+            ds4ControllerOpts[device].GyroPitchOffset = 0;
+            ds4ControllerOpts[device].EnableGyroRollOffset = DEFAULT_ENABLE_GYRO_ROLL_OFFSET;
+            ds4ControllerOpts[device].GyroRollOffset = 0;
+
+            ds4ControllerOpts[device].ForceGyroAxisFixup = DEFAULT_FORCE_GYRO_AXIS_FIXUP;
+            ds4ControllerOpts[device].EnableGyroYawOffset = DEFAULT_ENABLE_GYRO_YAW_OFFSET;
+            ds4ControllerOpts[device].GyroYawOffset = 0;
+            ds4ControllerOpts[device].EnableGyroPitchOffset = DEFAULT_ENABLE_GYRO_PITCH_OFFSET;
+            ds4ControllerOpts[device].GyroPitchOffset = 0;
+            ds4ControllerOpts[device].EnableGyroRollOffset = DEFAULT_ENABLE_GYRO_ROLL_OFFSET;
+            ds4ControllerOpts[device].GyroRollOffset = 0;
+
+            ds4ControllerOpts[device].ForceGyroAxisFixup = DEFAULT_FORCE_GYRO_AXIS_FIXUP;
+            ds4ControllerOpts[device].EnableGyroYawOffset = DEFAULT_ENABLE_GYRO_YAW_OFFSET;
+            ds4ControllerOpts[device].GyroYawOffset = 0;
+            ds4ControllerOpts[device].EnableGyroPitchOffset = DEFAULT_ENABLE_GYRO_PITCH_OFFSET;
+            ds4ControllerOpts[device].GyroPitchOffset = 0;
+            ds4ControllerOpts[device].EnableGyroRollOffset = DEFAULT_ENABLE_GYRO_ROLL_OFFSET;
+            ds4ControllerOpts[device].GyroRollOffset = 0;
         }
 
         private void PrepareBlankingProfile(int device, ControlService control, out bool xinputPlug, out bool xinputStatus, bool xinputChange = true)

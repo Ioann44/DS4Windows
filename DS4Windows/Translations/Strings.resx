@@ -1409,4 +1409,25 @@ Please click OK to confirm that you have read the message. Press Cancel to be re
   <data name="Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
+  <data name="GyroCalibrationSpecials" xml:space="preserve">
+    <value>Gyro Calibration Specials</value>
+  </data>
+  <data name="ForceGyroAxisFixup" xml:space="preserve">
+    <value>Force Inverted Gyro Yaw Fixup</value>
+  </data>
+  <data name="ForceGyroAxisFixupTip" xml:space="preserve">
+    <value>Force fixup of inverted gyro axis for some older DS4 v.1 gamepads. Leave enabled if you experience inverted YAW axis in gyro controls. Probably won't change anything, if your gamepad already working correctly. Device reconnection needed.</value>
+  </data>
+  <data name="ManualGyroOffsets" xml:space="preserve">
+    <value>Manual Gyro Offsets</value>
+  </data>
+  <data name="EnableGyroYawOffset" xml:space="preserve">
+    <value>Enable Yaw Offset</value>
+  </data>
+  <data name="EnableGyroPitchOffset" xml:space="preserve">
+    <value>Enable Pitch Offset</value>
+  </data>
+  <data name="EnableGyroRollOffset" xml:space="preserve">
+    <value>Enable Roll Offset</value>
+  </data>
 </root>

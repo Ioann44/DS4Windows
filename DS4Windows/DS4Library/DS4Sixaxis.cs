@@ -200,6 +200,13 @@ namespace DS4Windows
         private int gyro_offset_z = 0;
         private double gyro_accel_magnitude = 1.0f;
         private Stopwatch gyroAverageTimer = new Stopwatch();
+
+        private int gyroYawOffset = 0;
+        private int gyroPitchOffset = 0;
+        private int gyroRollOffset = 0;
+
+        private int deviceIdx = -1;
+        public int DeviceIdx { get { return deviceIdx; } set { deviceIdx = value; } }
         public long CntCalibrating
         {
             get
@@ -316,9 +323,27 @@ namespace DS4Windows
             accelZ = temInt = (int)(temInt * (current.sensNumer / (float)current.sensDenom));
         }
 
+        private void UpdateCustomGyroOffsets() {
+            gyroYawOffset = gyro_offset_x;
+            gyroPitchOffset = gyro_offset_y;
+            gyroRollOffset = gyro_offset_z;
+
+            if (deviceIdx != -1) {
+                if (Global.DS4ControllerOpts[DeviceIdx].EnableGyroYawOffset) {
+                    gyroYawOffset = Global.DS4ControllerOpts[DeviceIdx].GyroYawOffset;
+                }
+                if (Global.DS4ControllerOpts[DeviceIdx].EnableGyroPitchOffset) {
+                    gyroPitchOffset = Global.DS4ControllerOpts[DeviceIdx].GyroPitchOffset;
+                }
+                if (Global.DS4ControllerOpts[DeviceIdx].EnableGyroRollOffset) {
+                    gyroRollOffset = Global.DS4ControllerOpts[DeviceIdx].GyroRollOffset;
+                }
+            }
+        }
+
         public unsafe void handleSixaxis(byte* gyro, byte* accel, DS4State state,
             double elapsedDelta)
-        {
+            {
             unchecked
             {
                 int currentYaw = (short)((ushort)(gyro[3] << 8) | gyro[2]);
@@ -338,9 +363,11 @@ namespace DS4Windows
                     CalcSensorCamples(ref currentYaw, ref currentPitch, ref currentRoll, ref AccelX, ref AccelY, ref AccelZ);
                 }
 
-                currentYaw -= gyro_offset_x;
-                currentPitch -= gyro_offset_y;
-                currentRoll -= gyro_offset_z;
+                UpdateCustomGyroOffsets();
+
+                currentYaw -= gyroYawOffset;
+                currentPitch -= gyroPitchOffset;
+                currentRoll -= gyroRollOffset;
 
                 SixAxisEventArgs args = null;
                 if (AccelX != 0 || AccelY != 0 || AccelZ != 0)
@@ -387,9 +414,11 @@ namespace DS4Windows
                     CalcSensorCamples(ref currentYaw, ref currentPitch, ref currentRoll, ref AccelX, ref AccelY, ref AccelZ);
                 }
 
-                currentYaw -= gyro_offset_x;
-                currentPitch -= gyro_offset_y;
-                currentRoll -= gyro_offset_z;
+                UpdateCustomGyroOffsets();
+
+                currentYaw -= gyroYawOffset;
+                currentPitch -= gyroPitchOffset;
+                currentRoll -= gyroRollOffset;
 
                 SixAxisEventArgs args = null;
                 if (AccelX != 0 || AccelY != 0 || AccelZ != 0)
@@ -419,9 +448,11 @@ namespace DS4Windows
                     CalcSensorCamples(ref currentYaw, ref currentPitch, ref currentRoll, ref AccelX, ref AccelY, ref AccelZ);
                 }
 
-                currentYaw -= gyro_offset_x;
-                currentPitch -= gyro_offset_y;
-                currentRoll -= gyro_offset_z;
+                UpdateCustomGyroOffsets();
+
+                currentYaw -= gyroYawOffset;
+                currentPitch -= gyroPitchOffset;
+                currentRoll -= gyroRollOffset;
             }
         }
 
