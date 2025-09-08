@@ -326,6 +326,28 @@ namespace DS4WinWPF.DS4Forms
                     accelYSlider.Value = exposeState.getAccelY();
                     accelZSlider.Value = exposeState.getAccelZ();
 
+                    // Calculate and display original, offset, and result for Gyro Yaw, Pitch, Roll
+                    int gyroYawOffset = ds.SixAxis.GyroYawOffset;
+                    int gyroPitchOffset = ds.SixAxis.GyroPitchOffset;
+                    int gyroRollOffset = ds.SixAxis.GyroRollOffset;
+
+                    // gyroYawFull and gyroRollFull are inverted in SixAxis.populate, so invert them back for original calculation
+                    int currentYaw = -baseState.Motion.gyroYawFull + gyroYawOffset;
+                    int currentPitch = baseState.Motion.gyroPitchFull + gyroPitchOffset;
+                    int currentRoll = -baseState.Motion.gyroRollFull + gyroRollOffset;
+
+                    gyroYawOriginalLb.Content = currentYaw;
+                    gyroYawOffsetLb.Content = gyroYawOffset;
+                    gyroYawResultLb.Content = baseState.Motion.gyroYawFull;
+
+                    gyroPitchOriginalLb.Content = currentPitch;
+                    gyroPitchOffsetLb.Content = gyroPitchOffset;
+                    gyroPitchResultLb.Content = baseState.Motion.gyroPitchFull;
+
+                    gyroRollOriginalLb.Content = currentRoll;
+                    gyroRollOffsetLb.Content = gyroRollOffset;
+                    gyroRollResultLb.Content = baseState.Motion.gyroRollFull;
+
                     touchXValLb.Content = baseState.TrackPadTouch0.X;
                     touchYValLb.Content = baseState.TrackPadTouch0.Y;
 

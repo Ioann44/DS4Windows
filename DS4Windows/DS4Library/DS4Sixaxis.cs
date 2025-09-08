@@ -205,6 +205,10 @@ namespace DS4Windows
         private int gyroPitchOffset = 0;
         private int gyroRollOffset = 0;
 
+        public int GyroYawOffset { get => gyroYawOffset; }
+        public int GyroPitchOffset { get => gyroPitchOffset; }
+        public int GyroRollOffset { get => gyroRollOffset; }
+
         private int deviceIdx = -1;
         public int DeviceIdx { get { return deviceIdx; } set { deviceIdx = value; } }
         public long CntCalibrating

@@ -5,7 +5,7 @@
 * Change update channel
 * Test compatibility
 * Publish release
-* ? Add UI for gyro numeric outputs
+* ~~Add UI for gyro numeric outputs~~ Maybe increased window height will be better?
 
 <details>
 <summary>Old TODOs</summary>
