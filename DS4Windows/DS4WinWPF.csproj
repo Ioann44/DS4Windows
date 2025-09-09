@@ -15,14 +15,14 @@
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <EnableNETAnalyzers>false</EnableNETAnalyzers>
     <ServerGarbageCollection>true</ServerGarbageCollection>
-    <AssemblyVersion>3.3.3</AssemblyVersion>
-    <FileVersion>3.3.3</FileVersion>
-    <Version>3.3.3</Version>
+    <AssemblyVersion>3.4.0</AssemblyVersion>
+    <FileVersion>3.4.0</FileVersion>
+    <Version>3.4.0</Version>
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <Copyright>Copyright © Scarlet.Crush Productions 2012, 2013; InhexSTER, HecticSeptic, electrobrains 2013, 2014; Jays2Kings 2013, 2014, 2015, 2016; Ryochan7 2017-2023</Copyright>
+    <Copyright>Copyright © Scarlet.Crush Productions 2012, 2013; InhexSTER, HecticSeptic, electrobrains 2013, 2014; Jays2Kings 2013, 2014, 2015, 2016; Ryochan7 2017-2024; Ioann44 2025</Copyright>
     <Description>Sony DualShock 4 to Microsoft Xinput controller mapper</Description>
-    <Authors>Ryochan7</Authors>
+    <Authors>Ioann44</Authors>
     <Company />
   </PropertyGroup>
 
@@ -373,7 +373,7 @@
     <Folder Remove="extras\" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="rem Copy compiled l18n assemblies to alt folder&#xD;&#xA;GOTO END&#xD;&#xA;if not exist $(TargetDir)Lang mkdir $(TargetDir)Lang&#xD;&#xA;set langs=ar cs de el es fi fr he hu-HU idn it ja ms nl pl pt pt-BR ru se tr uk-UA vi zh-Hans zh-Hant&#xD;&#xA;&#xD;&#xA;for %25%25l in (%25langs%25) do (&#xD;&#xA;  xcopy $(TargetDir)%25%25l $(TargetDir)Lang\%25%25l\ /s /y&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;echo $(Version)&gt; $(ProjectDir)\newest.txt&#xD;&#xA;&#xD;&#xA;:END&#xD;&#xA;" />
+  <Target Name="PostPublish" AfterTargets="Publish">
+    <Exec Command="rem Copy compiled l18n assemblies to alt folder&#xD;&#xA;rem GOTO END&#xD;&#xA;if exist $(PublishDir)Lang rmdir /s /q $(PublishDir)Lang; mkdir $(PublishDir)Lang&#xD;&#xA;set langs=ar cs de el es fi fr he hu-HU idn it ja ms nl pl pt pt-BR ru se tr uk-UA vi zh-Hans zh-Hant zh-CN&#xD;&#xA;for %25%25l in (%25langs%25) do (&#xD;&#xA; move /Y $(PublishDir)%25%25l $(PublishDir)Lang > nul&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;echo $(Version)&gt; $(ProjectDir)\newest.txt&#xD;&#xA;&#xD;&#xA;:END&#xD;&#xA;" />
   </Target>
 </Project>

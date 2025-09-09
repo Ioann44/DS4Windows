@@ -9,7 +9,7 @@
         Title="{lex:LocExtension HotkeysAbout}" Height="450" Width="800"
         Style="{DynamicResource WindowStyle}">
     <DockPanel>
-        <Label x:Name="headerLb" Content="DS4Windows - Ryochan7 Build (Version " DockPanel.Dock="Top" HorizontalAlignment="Center" />
+        <Label x:Name="headerLb" Content="DS4Windows - Ioann44 Build (Version " DockPanel.Dock="Top" HorizontalAlignment="Center" />
         
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,4,0,0">
             <Hyperlink x:Name="changeLogLink" Click="ChangeLogLink_Click" Foreground="{DynamicResource AccentColor}">Changelog</Hyperlink>

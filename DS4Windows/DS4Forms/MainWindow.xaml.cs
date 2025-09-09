@@ -205,8 +205,9 @@ namespace DS4WinWPF.DS4Forms
                 int checkwhen = Global.CheckWhen;
                 if (checkwhen > 0 && DateTime.Now >= Global.LastChecked + TimeSpan.FromHours(checkwhen))
                 {
-                    mainWinVM.DownloadUpstreamVersionInfo();
-                    Check_Version();
+                    AppLogger.LogToGui("Sorry, I don't plan to setup custom updater yet", false);
+                    // mainWinVM.DownloadUpstreamVersionInfo();
+                    // Check_Version();
 
                     Global.LastChecked = DateTime.Now;
                 }
@@ -1430,8 +1431,9 @@ Suspend support not enabled.", true);
         {
             Task.Run(() =>
             {
-                mainWinVM.DownloadUpstreamVersionInfo();
-                Check_Version(true);
+                AppLogger.LogToGui("Sorry, I don't plan to setup custom updater yet", false);
+                // mainWinVM.DownloadUpstreamVersionInfo();
+                // Check_Version(true);
             });
         }
 

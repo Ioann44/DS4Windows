@@ -7,9 +7,22 @@ DualShock 4 experience on your PC. By emulating an Xbox 360 controller, many
 more games are accessible. Other input controllers are also supported including the
 DualSense, Switch Pro, and JoyCon controllers (**first party hardware only**).
 
-This project is a fork of the work of Jays2Kings.
+This project is a fork of the work of Jays2Kings, and later Ryochan7.
 
 ![DS4Windows Preview](https://raw.githubusercontent.com/Ryochan7/DS4Windows/jay/ds4winwpf_screen_20200412.png)
+
+## About fork
+
+This fork was originally created to improve gyro usage experience. Ryochan7's repo is archived, and I want provide fixes for my possible mistakes without depending on another maintainer.
+
+![Added functionality](https://raw.githubusercontent.com/Ioann44/DS4Windows/master/images/about_fork.png)
+
+Now you can:
+- fix inverted gyro yaw issue, if you don't get lucky to have a gamepad with hardcoded `ProductId==0x5C4` and `VendorId==0x054C` (what?).
+- see exact numeric values for gyro raw inputs (which gamepad gives you), applied offsets (calculated on every gamepad connection by average values, it should be placed on a flat surface during calibration), and output values (after subtracting offsets, which games will receive)
+- set your custom offsets, which will be used instead of obtained by calibration. You can set previously "calibrated" values, so now you can omit placing it on the table... Or, as in my case (gamepad somehow gives slightly different yaw values depending, if gamepad "resting", or any button pressed, and because of that can't be calibrated properly), specifying custom offsets can give better accuracy.
+
+Where is no update checker, as I have no plans to develop this fork further. Will glad to know about related issues though.
 
 ## License
 
@@ -20,7 +33,7 @@ available in this source code from the COPYING file.
 
 ## Downloads
 
-- **[Main builds of DS4Windows](https://github.com/Ryochan7/DS4Windows/releases)**
+- **[Main builds of DS4Windows](https://github.com/Ioann44/DS4Windows/releases)**
 
 ## Requirements
 
@@ -40,3 +53,11 @@ available in this source code from the COPYING file.
   *Disabling 'Enable output data' in the controller profile settings might help with latency issues, but will disable lightbar and rumble support.*
 - Disable **PlayStation Configuration Support** and
 **Xbox Configuration Support** options in Steam
+
+## If you want build it by yourself
+
+I recommend next commands
+```sh
+dotnet publish DS4Windows/DS4WinWPF.csproj -c Release -r win-x64  -o "./publish/x64/DS4Windows/" /p:Platform=x64
+dotnet publish DS4Windows/DS4WinWPF.csproj -c Release -r win-x86  -o "./publish/x86/DS4Windows/" /p:Platform=x86
+```

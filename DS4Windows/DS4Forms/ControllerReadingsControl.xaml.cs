@@ -338,7 +338,7 @@ namespace DS4WinWPF.DS4Forms
 
                     gyroYawOriginalLb.Content = currentYaw;
                     gyroYawOffsetLb.Content = gyroYawOffset;
-                    gyroYawResultLb.Content = baseState.Motion.gyroYawFull;
+                    gyroYawResultLb.Content = -baseState.Motion.gyroYawFull;
 
                     gyroPitchOriginalLb.Content = currentPitch;
                     gyroPitchOffsetLb.Content = gyroPitchOffset;
@@ -346,7 +346,7 @@ namespace DS4WinWPF.DS4Forms
 
                     gyroRollOriginalLb.Content = currentRoll;
                     gyroRollOffsetLb.Content = gyroRollOffset;
-                    gyroRollResultLb.Content = baseState.Motion.gyroRollFull;
+                    gyroRollResultLb.Content = -baseState.Motion.gyroRollFull;
 
                     touchXValLb.Content = baseState.TrackPadTouch0.X;
                     touchYValLb.Content = baseState.TrackPadTouch0.Y;

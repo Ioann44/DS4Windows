@@ -1,11 +1,10 @@
 # TODO
 
-* Update readme
-* Update docs
-* Change update channel
-* Test compatibility
-* Publish release
 * ~~Add UI for gyro numeric outputs~~ Maybe increased window height will be better?
+
+Not needed yet:
+* Change update channel
+* Self contained version to releases?
 
 <details>
 <summary>Old TODOs</summary>
